@@ -12,26 +12,27 @@ Requirements
 Role Variables
 --------------
 
-  tgn_flows_filepath:
+- tgn_flows_filepath:
     description:
       - This value is used to specifiy a file with flows info which will be used
         to send packets from this tgn. It is JSON encoded file with flows info
         like source ip, source port, destination port etc
+    example: templates/example_packet_dict.json
     required: True
 
-  tgn_out_port:
+-  tgn_out_port:
     description:
       - This value specifies a port on TGN which will be used to send packets
         from the device. This port should have L3 connectivity to DUT to send
         traffic for verification of service
     required: True
   
-  tgn_l3_gateway:
+- tgn_l3_gateway:
     description:
       - This value specifies default L3 gateway to send packets towards DUT.
     required: True
 
-  tgn_wildcard_dest:
+- tgn_wildcard_dest:
     description:
       - This value is used to identify an internet host. A service (e.g. ACL) might be
         used to control access to internet. A destination ip would be 'any' in that case.
