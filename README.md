@@ -49,6 +49,10 @@ None
 Example Playbook
 ----------------
     - hosts: servers
+      vars:
+        tgn_flows_filepath: '~/packet_dict_in.json'
+        tgn_out_port: 'enp0s16'
+        tgn_l3_gateway: '12.1.1.21'
       roles:
          - { role: ansible-network.linux_tgn }
 
