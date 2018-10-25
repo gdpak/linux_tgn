@@ -1,38 +1,62 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This Ansible network role provides functionality to send packets from a host based on an input JSON of packet keys like source ip address , destination ip address etc
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ansible 2.6 or later
+- scapy python module
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+  tgn_flows_filepath:
+    description:
+      - This value is used to specifiy a file with flows info which will be used
+        to send packets from this tgn. It is JSON encoded file with flows info
+        like source ip, source port, destination port etc
+    required: True
+
+  tgn_out_port:
+    description:
+      - This value specifies a port on TGN which will be used to send packets
+        from the device. This port should have L3 connectivity to DUT to send
+        traffic for verification of service
+    required: True
+  
+  tgn_l3_gateway:
+    description:
+      - This value specifies default L3 gateway to send packets towards DUT.
+    required: True
+
+  tgn_wildcard_dest:
+    description:
+      - This value is used to identify an internet host. A service (e.g. ACL) might be
+        used to control access to internet. A destination ip would be 'any' in that case.
+        traffic generator would use this value to verify access to internet is working as
+        intended. This option is required only if your service has 'any' type of destination
+        ip to be tested
+    required: False
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ansible-network.linux_tgn }
 
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ansible network Team
