@@ -43,7 +43,6 @@ EXAMPLES = """
 RETURN = """
 """
 import re
-import q
 import sys
 import os
 import json
@@ -105,7 +104,6 @@ class TrafficGen(object):
                        udp = UDP(dport=22)
                    frame = frame / udp
 
-            q(frame)
             # Now add Host route via Gateway and port of TGN
             # Route will be deleted after exit from this process
             conf.route.add(host=frame.dst, gw=self._gw, dev=self._port)
